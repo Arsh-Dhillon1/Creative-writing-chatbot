@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Creative Catalyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container login-container">
+        <h1>Access Protocol</h1>
+        <form id="loginForm" onsubmit="return handleLogin(event)">
+            <div class="input-area">
+                <label for="username">Unit ID:</label>
+                <input type="text" id="username" placeholder="Enter Username" required>
+                <label for="password">Access Code:</label>
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <button type="submit">Initiate Access</button>
+            </div>
+        </form>
+        <div id="loginResult" class="result-area">
+            <p>Enter credentials to proceed.</p>
+        </div>
+    </div>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/'; // Redirect to Creative Catalyst
+                } else {
+                    document.getElementById("loginResult").innerText = "Access Denied: Invalid credentials.";
+                }
+            })
+            .catch(error => {
+                document.getElementById("loginResult").innerText = "System Error: Unable to process.";
+                console.error("Error:", error);
+            });
+            return false;
+        }
+    </script>
+</body>
+</html>
