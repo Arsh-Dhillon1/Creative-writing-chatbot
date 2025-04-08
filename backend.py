@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-import requests  # Added for HTTP requests
-import random   # Added for random number generation
+import requests 
+import random   
 
 app = Flask(__name__)
 CORS(app)  
@@ -9,18 +9,18 @@ CORS(app)
 API_KEY = "Cannot Show for Privacy Reason"
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
 
-# Hardcoded credentials (replace with a database or secure method later)
+
 VALID_USERNAME = "admin"
 VALID_PASSWORD = "robot123"
 
 @app.route("/")
 def home():
-    return render_template("index.html")  # Load the Creative Catalyst UI
+    return render_template("index.html")  
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        return render_template("login.html")  # Show login page
+        return render_template("login.html")  
     elif request.method == "POST":
         data = request.get_json()
         username = data.get("username")
