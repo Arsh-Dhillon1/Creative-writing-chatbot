@@ -6,7 +6,7 @@ import random   # Added for random number generation
 app = Flask(__name__)
 CORS(app)  
 
-API_KEY = "AIzaSyBayQO2E3iDmtDUc2OBDATgEmfqeWJvdzk"
+API_KEY = "Cannot Show for Privacy Reason"
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
 
 # Hardcoded credentials (replace with a database or secure method later)
